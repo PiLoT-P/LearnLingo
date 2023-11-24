@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/LearnLingo/static/css/main.65eebeb4.css",
+    "main.js": "/LearnLingo/static/js/main.bdbe6487.js",
+    "static/media/Roboto-Medium.ttf": "/LearnLingo/static/media/Roboto-Medium.7c8d04cd831df3033c8a.ttf",
+    "static/media/Roboto-Regular.ttf": "/LearnLingo/static/media/Roboto-Regular.fc2b5060f7accec5cf74.ttf",
+    "static/media/Roboto-Bold.ttf": "/LearnLingo/static/media/Roboto-Bold.f80816a5455d171f948d.ttf",
+    "index.html": "/LearnLingo/index.html",
+    "static/media/symbol-defs.svg": "/LearnLingo/static/media/symbol-defs.39d96b1bb06894faccdf7984e5c5f7aa.svg",
+    "main.65eebeb4.css.map": "/LearnLingo/static/css/main.65eebeb4.css.map",
+    "main.bdbe6487.js.map": "/LearnLingo/static/js/main.bdbe6487.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.65eebeb4.css",
+    "static/js/main.bdbe6487.js"
+  ]
+}
