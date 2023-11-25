@@ -2,6 +2,7 @@
 import s from './Header.module.css'
 import imgLogo from '../../assets/image/LogoPNG.png'
 import svg from 'assets/icons/symbol-defs.svg'
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -9,8 +10,8 @@ const Header = () => {
             <header className={s.header}>
                 <img className={s.logo} src={imgLogo} alt="Logo" />
                 <div className={s.navigate}>
-                    <a className={s.text} href="/">Home</a>
-                    <a className={s.text} href="/">Teachers</a>
+                    <NavLink className={s.text} to='/home'>Home</NavLink>
+                    <NavLink className={s.text} to='/teachers'>Teachers</NavLink>
                 </div>
                 <div className={s.users}>
                     <button className={s.logIn} type='button'>
