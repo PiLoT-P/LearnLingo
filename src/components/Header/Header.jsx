@@ -1,5 +1,5 @@
 
-import s from './Header.module.css'
+import s from './Header.module.scss'
 import imgLogo from '../../assets/image/LogoPNG.png'
 import svg from 'assets/icons/symbol-defs.svg'
 import { NavLink } from 'react-router-dom';
