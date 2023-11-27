@@ -45,6 +45,19 @@
 .iconLogIn{
     stroke: #F4C550;
 }
+.iconLogOut{
+    fill: #F4C550;
+}
+
+.textGL{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 157px;
+    background-color: #FFDC86;
+    border-radius: 12px;
+    font-weight: 700;
+}
 
 .register{
     cursor: pointer;

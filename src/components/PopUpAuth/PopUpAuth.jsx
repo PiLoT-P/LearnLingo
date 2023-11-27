@@ -1,10 +1,10 @@
 import { useState } from "react";
 import s from './PopUpAuth.module.scss'
 import svg from '../../assets/icons/symbol-defs.svg'
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { loginUser, registerUser } from "Redux/auth/authOperation";
 
-const PopUpAuth = () => {
+const PopUpAuth = ({authType, isHidden, onIsHidden}) => {
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         name: '',
@@ -12,8 +12,7 @@ const PopUpAuth = () => {
         password: '',
     })
     const [passwordShow, setPasswordShow] = useState(false);
-    const isHidden = false;
-    const nameAuth = 'r';
+    const nameAuth = authType;
 
     const hendleChange = (e) => {
         const { name, value } = e.target;
@@ -26,8 +25,9 @@ const PopUpAuth = () => {
     
     const hendleSubmit = (e) => {
         e.preventDefault();
-        console.log('sub');
-        dispatch(registerUser(form));
+        authType === 'logIn' ?  dispatch(loginUser(form)) :
+            dispatch(registerUser(form));
+        onIsHidden();
     }
 
     return (
@@ -36,7 +36,7 @@ const PopUpAuth = () => {
                 <div className={s.container}>
                     <h2 className={s.title}>{nameAuth === 'logIn' ?  'Log In' : 'Registration'}</h2>
                     <p className={s.text}>{nameAuth === 'logIn' ? 'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.' : 'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information'}</p>
-                    <svg  className={s.iconExit} width="32" height="32">
+                    <svg  className={s.iconExit} width="32" height="32" onClick={( ) => onIsHidden()}>
                         <use href={`${svg}#exit`}></use>
                     </svg>
                     <form className={s.formPopUp} onSubmit={hendleSubmit}>

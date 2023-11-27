@@ -9,7 +9,6 @@ const authSlice = createSlice({
         isAuth: false,
         email: null,
         name: null,
-        password: null,
         isLoading: false,
         error: null,
     },
@@ -18,20 +17,17 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(registerUser.fulfilled, (state, { payload }) => {
-                console.log('slice')
-                return {
-                    ...state,
-                    ...payload,
-                    isAuth: true,
-                }
+            .addCase(registerUser.fulfilled, (state, {payload}) => {
+                state.token = payload.token;
+                state.name = payload.name;
+                state.email = payload.email;
+                state.isAuth = true;
             })
             .addCase(loginUser.fulfilled, (state, { payload }) => {
-                return {
-                    ...state,
-                    ...payload,
-                    isAuth: true,
-                }
+                state.token = payload.token;
+                state.name = payload.name;
+                state.email = payload.email;
+                state.isAuth = true;
             })
             .addCase(logoutUser.fulfilled, (state, { payload }) => {
                 return {
@@ -39,7 +35,6 @@ const authSlice = createSlice({
                     isAuth: false,
                     email: null,
                     name: null,
-                    password: null,
                     isLoading: false,
                     error: null,
                 }

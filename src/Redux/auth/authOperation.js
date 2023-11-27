@@ -1,12 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { registerUserFB } from 'service/getDataFromFirebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 export const registerUser = createAsyncThunk(
   'auth/register',
-  async (user, thunkApi) => { 
+  async ({ name, email, password }, thunkApi) => { 
     try {
-        const userData = await registerUserFB(user);
-        return userData;
+      const userFirebase = await createUserWithEmailAndPassword(auth, email, password);
+      const userData = userFirebase.user;
+
+      await updateProfile(userData, { displayName: name });
+
+      return {
+        token: userData.uid,
+        name: userData.displayName,
+        email: userData.email
+      };
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
     }
@@ -15,9 +24,16 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'auth/login',
-  async (user, thunkApi) => {
+  async ({ name, email, password }, thunkApi) => {
       try { 
+        const userFirebase = await signInWithEmailAndPassword(auth, email, password);
+        const userData = userFirebase.user;
 
+        return {
+          token: userData.uid,
+          name: userData.displayName,
+          email: userData.email
+        };
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
     }
@@ -28,7 +44,7 @@ export const logoutUser = createAsyncThunk(
   'auth/logout',
   async (_, thunkApi) => {
     try {
-
+      await signOut(auth);
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
     }
