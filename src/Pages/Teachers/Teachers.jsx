@@ -6,7 +6,7 @@ import { useDispatch} from "react-redux";
 const Teachers = () => {
     const dispatch = useDispatch()
     return (
-        <section>
+        <section style={{ backgroundColor: "#e9e9e9" }}>
             <button type="button" onClick={() => {
                 console.log('btn click')
                 dispatch(getDataTeachers())

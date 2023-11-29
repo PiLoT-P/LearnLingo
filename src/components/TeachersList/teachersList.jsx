@@ -2,16 +2,23 @@ import { selectorTeachers } from "Redux/teachers/teachersSelectors";
 import { useSelector } from "react-redux";
 import s from './TeachersList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
+import { useState } from "react";
 
 const TeachersList = () => {
     const teachersData = useSelector(selectorTeachers);
+    const [indexHidden, setIndexHidden] = useState(-1);
 
     return (
         <>
             <ul className={s.mainList}>
                 {teachersData.map(({avatar_url, conditions, experience, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
                     <li key={`${index}_${surname}`} className={s.mainListItem}>
-                        <img width='96px' height='96px' src={avatar_url} alt="avatar teacher" className={s.avatar} />
+                        <div className={s.blockAvatar}>
+                            <svg className={s.iconDot} width="12" height="12">
+                                <use href={`${svg}#greenDot`}></use>
+                            </svg>
+                            <img width='120px' height='120px' src={avatar_url} alt="avatar teacher" className={s.avatar} />
+                        </div>
                         <div className={s.container}>
                             <div className={s.topBlock}>
                                 <span className={`${s.text} ${s.textLanguages}`}>Languages</span>
@@ -39,18 +46,46 @@ const TeachersList = () => {
                                     <use href={`${svg}#heart`}></use>
                                 </svg>
                             </div>
-                            <p className={s.nameSurname}>{`${name} ${surname}`}</p>
+                            <p className={`${s.text} ${s.nameSurname}`}>{`${name} ${surname}`}</p>
                             <ul className={s.informationList}>
-                                <li className={s.item}>Speaks: <span className={s.text}>{languages.map((el) => ` `+el)}</span></li>
-                                <li className={s.item}>Lesson Info: <span className={s.text}>{lesson_info}</span></li>
-                                <li className={s.item}>Conditions: <span  className={s.text}>{conditions}</span></li>
+                                <li className={`${s.text} ${s.item}`}>Speaks: <span className={`${s.text} ${s.textLanguages}`}>{languages.map((el) => ` `+el)}</span></li>
+                                <li className={`${s.text} ${s.item}`}>Lesson Info: <span className={s.text}>{lesson_info}</span></li>
+                                <li className={`${s.text} ${s.item}`}>Conditions: <span  className={s.text}>{conditions}</span></li>
                             </ul>
-                            <button type="button" className={s.btn}>Read more</button>
+                            {indexHidden === -1 || indexHidden < index || indexHidden > index ? <button type="button"  className={`${s.text} ${s.btn}`} onClick={() => {setIndexHidden(index); }}>Read more</button> : null}
+                            {indexHidden === index ? 
+                                <div className={s.hiddenBlock}>
+                                    <p className={`${s.text} ${s.textExperience}`}>{experience}</p>
+                                    <ul className={s.commentList}>
+                                        {reviews.map(({ comment, reviewer_name, reviewer_rating, surname }) => (
+                                            <li className={s.item}>
+                                                <div className={s.container}>
+                                                    <svg className={s.iconUser} width="44" height="43">
+                                                        <use href={`${svg}#user`}></use>
+                                                    </svg>
+                                                    <div>
+                                                        <span className={`${s.text} ${s.name}`}>{reviewer_name}</span>
+                                                        <div className={s.blockRating}>
+                                                            <svg width="16" height="16">
+                                                                <use href={`${svg}#star`}></use>
+                                                            </svg>
+                                                            <span className={s.textRating}>{reviewer_rating}.0</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p className={s.text}>{comment}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                : null
+                            }
                             <ul className={s.levelsList}>
                                 {levels.map((el, id) => (
-                                    <li className={s.item}>{el}</li>
+                                    <li className={`${s.text} ${s.item}`}>#{el}</li>
                                 ))}
                             </ul>
+                            {indexHidden === index ? <button className={s.btnTrail} type="button">Book trial lesson</button> : null}
                         </div>
                   </li>  
                 ))}

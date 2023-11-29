@@ -15,12 +15,9 @@
     width: 100%;
     max-width: 1184px;
 
-    background-color: #CBDED3;
+    background-color: #fff;
     border-radius: 24px;
 }
-// .mainListItem:not(:last-child){
-//     margin-bottom: 32px;
-// }
 
 .text{
     color: #121417;
@@ -36,13 +33,27 @@
     width: 100%;
 }
 
+.blockAvatar{
+    position: relative;
+}
+
+.iconDot{
+    position: absolute;
+
+    top: 19px;
+    right: 23px;
+}
+
 .avatar{
     border-radius: 50%;
+    padding: 12px;
+
+    border: 3px solid #FBE9BA;
 }
 
 .topBlock{
     display: flex;
-
+    margin-bottom: 8px;
 }
 
 .textLanguages{
@@ -84,4 +95,122 @@
 
 .money{
     color: #38CD3E;
+}
+
+.nameSurname{
+    font-size: 24px;
+    line-height: 1;
+
+    margin-bottom: 32px;
+}
+
+.informationList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-bottom: 16px;
+
+    .item{
+        color: #8A8A89;
+
+        .textLanguages {
+            color: #121417;
+            text-decoration-line: underline;
+        }
+    }
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 32px;
+    padding: 0;
+    cursor: pointer;
+
+    text-decoration-line: underline;
+}
+
+.levelsList{
+    display: flex;
+    gap: 8px;
+
+    .item{
+        padding: 8px 12px;
+
+        border-radius: 35px;
+        border: 1px solid rgba(18, 20, 23, 0.20);
+        
+        font-size: 14px;
+        line-height: 1.14;
+    }
+}
+
+.textExperience{
+    font-weight: 400;
+    
+    margin-bottom: 32px;
+}
+
+.iconUser {
+    fill: black;
+    padding: 4px;
+    background-color:  #c5c5c5;
+    border-radius: 50%;
+}
+
+.commentList{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    margin-bottom: 32px;
+
+    .container{
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .name{
+        color: #8A8A89;
+        margin-bottom: 2px;
+    }
+
+    .blockRating{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+    }
+    .textRating{
+        color: #121417;
+        
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.28;
+    }
+}
+
+.btnTrail{
+    display: flex;
+    padding: 16px 48px;
+    margin-top: 32px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    border: none;
+    border-radius: 12px;
+    background: #F4C550;
+
+    color: #121417;
+    
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.55;
 }
