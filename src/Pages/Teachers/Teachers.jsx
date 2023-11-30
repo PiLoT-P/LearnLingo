@@ -1,19 +1,24 @@
 import { getDataTeachers } from "Redux/teachers/teachersOperation";
+import TeachersFilter from "components/TeachersFilter/TeachersFilter";
 import TeachersList from "components/TeachersList/TeachersList";
 import { useDispatch} from "react-redux";
 
 
 const Teachers = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch(getDataTeachers())
+    // }, [dispatch]);
+
     return (
-        <section style={{ backgroundColor: "#e9e9e9" }}>
+        <section style={{ backgroundColor: "#e9e9e9", paddingBottom: "96px", paddingTop: "96px", minHeight: "100vh"}}>
             <button type="button" onClick={() => {
-                console.log('btn click')
                 dispatch(getDataTeachers())
             }} >
                 getData
             </button>
-            <h3>balik</h3>
+            <TeachersFilter/>
             <TeachersList/>
         </section>
     );

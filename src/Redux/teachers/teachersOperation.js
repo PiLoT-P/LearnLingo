@@ -6,14 +6,10 @@ export const getDataTeachers = createAsyncThunk(
     'teachers/getData',
     async (_, thunkApi) => {
         try {
-            console.log('thun');
             const teachersRef = ref(database)
-            console.log('thun2', teachersRef);
             const snapshot = await get(teachersRef);
-            console.log('thun3', snapshot);
             const teachersData = snapshot.val()
 
-            console.log('dataTeach',teachersData);
             return teachersData;
         } catch (err) {
             console.error('Error fetching data:', err);

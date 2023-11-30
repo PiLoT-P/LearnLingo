@@ -1,17 +1,38 @@
-import { selectorTeachers } from "Redux/teachers/teachersSelectors";
+import { selectorFilter, selectorTeachers } from "Redux/teachers/teachersSelectors";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import s from './TeachersList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
-import { useState } from "react";
+import srcImage from '../../assets/image/9169253.jpg'
 
 const TeachersList = () => {
     const teachersData = useSelector(selectorTeachers);
-    const [indexHidden, setIndexHidden] = useState(-1);
+    const filter = useSelector(selectorFilter);
+    const [indexHidden, setIndexHidden] = useState(-1); 
+    const [visibleTechers, setVisibleTeachers] = useState(4);
 
+    useEffect(() =>{
+        setVisibleTeachers(3);
+    }, [filter]);
+
+    const handleLoadMore = (e) => {
+        setVisibleTeachers((prevVisibleTeaches) => prevVisibleTeaches + 4);
+    }
+
+    const filteredTeachers = teachersData
+        .filter(({ languages, levels, price_per_hour }) => {
+            const languageMatch = filter.language ? languages.includes(filter.language) : true;
+            const levelMatch = filter.level ? levels.includes(filter.level) : true;
+            const priceMatch = filter.price ? price_per_hour === filter.price : true;
+
+            return languageMatch && levelMatch && priceMatch;
+        })
+    
     return (
         <>
             <ul className={s.mainList}>
-                {teachersData.map(({avatar_url, conditions, experience, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
+                {filteredTeachers.slice(0, visibleTechers).map(({avatar_url, conditions, experience, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
                     <li key={`${index}_${surname}`} className={s.mainListItem}>
                         <div className={s.blockAvatar}>
                             <svg className={s.iconDot} width="12" height="12">
@@ -57,8 +78,8 @@ const TeachersList = () => {
                                 <div className={s.hiddenBlock}>
                                     <p className={`${s.text} ${s.textExperience}`}>{experience}</p>
                                     <ul className={s.commentList}>
-                                        {reviews.map(({ comment, reviewer_name, reviewer_rating, surname }) => (
-                                            <li className={s.item}>
+                                        {reviews.map(({ comment, reviewer_name, reviewer_rating, surname }, id) => (
+                                            <li key={uuidv4()}  className={s.item}>
                                                 <div className={s.container}>
                                                     <svg className={s.iconUser} width="44" height="43">
                                                         <use href={`${svg}#user`}></use>
@@ -82,7 +103,8 @@ const TeachersList = () => {
                             }
                             <ul className={s.levelsList}>
                                 {levels.map((el, id) => (
-                                    <li className={`${s.text} ${s.item}`}>#{el}</li>
+                                    el.includes(filter.level) ? <li key={uuidv4()} className={`${s.text} ${s.item} ${s.found}`}>#{el}</li> :
+                                        <li key={uuidv4()} className={`${s.text} ${s.item}`}>#{el}</li>
                                 ))}
                             </ul>
                             {indexHidden === index ? <button className={s.btnTrail} type="button">Book trial lesson</button> : null}
@@ -90,6 +112,17 @@ const TeachersList = () => {
                   </li>  
                 ))}
             </ul>
+            {filteredTeachers.length <= visibleTechers ? null :
+                <button type="button" className={s.btnLoadMore} onClick={() => handleLoadMore()}>Load more</button>
+            }
+            {filteredTeachers.length < 1 ? 
+                <div className={s.blockErrorImg}>
+                    <img className={s.img} width='530px' height='530px' src={srcImage} alt="art" />
+                    <span className={s.text}>Not found teachers</span>
+                </div>
+                :
+                null
+            }
         </>
     );
 }

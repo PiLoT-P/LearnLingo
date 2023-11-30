@@ -6,10 +6,20 @@ const teachersSlice = createSlice({
     initialState: {
         teachers: [],
         isLoading: false,
+        filter: {
+            language: null,
+            level: null,
+            price: null,
+        },
         error: null,
     },
     reducers: {
-        
+        changeFilter: ({filter}, { payload }) => {
+            const { language, level, price } = payload;
+            filter.language = language;
+            filter.level = level;
+            filter.price = price;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -43,4 +53,5 @@ const teachersSlice = createSlice({
     }
 })
 
+export const { changeFilter } = teachersSlice.actions;
 export default teachersSlice.reducer;
