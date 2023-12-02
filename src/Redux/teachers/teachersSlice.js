@@ -1,5 +1,5 @@
 const { createSlice } = require("@reduxjs/toolkit");
-const { getDataTeachers } = require("./teachersOperation");
+const { getDataTeachers, addTeacherToFavorites } = require("./teachersOperation");
 
 const teachersSlice = createSlice({
     name: 'teachers',
@@ -11,6 +11,7 @@ const teachersSlice = createSlice({
             level: null,
             price: null,
         },
+        favorites: [],
         error: null,
     },
     reducers: {
@@ -26,6 +27,9 @@ const teachersSlice = createSlice({
             .addCase(getDataTeachers.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.teachers = payload;
+            })
+            .addCase(addTeacherToFavorites.fulfilled, (state, { payload }) => {
+                console.log('addTeacher', payload);
             })
             .addMatcher(
                 (action) =>

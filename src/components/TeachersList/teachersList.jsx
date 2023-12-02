@@ -1,16 +1,23 @@
 import { selectorFilter, selectorTeachers } from "Redux/teachers/teachersSelectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { selectorIsAuth } from "Redux/auth/authSelectors";
+import { addTeacherToFavorites } from "Redux/teachers/teachersOperation";
 import s from './TeachersList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
 import srcImage from '../../assets/image/9169253.jpg'
+import PopUpBookTrail from "components/PopUpBookTrail/PopUpBookTrail";
 
 const TeachersList = () => {
+    const dispatch = useDispatch();
     const teachersData = useSelector(selectorTeachers);
     const filter = useSelector(selectorFilter);
+    const isAuth = useSelector(selectorIsAuth);
     const [indexHidden, setIndexHidden] = useState(-1); 
     const [visibleTechers, setVisibleTeachers] = useState(4);
+    const [isHidden, setIsHidden] = useState(true);
+    const [dataForTrail, setdataForTrail] = useState(null)
 
     useEffect(() =>{
         setVisibleTeachers(3);
@@ -63,7 +70,16 @@ const TeachersList = () => {
                                         <span className={s.text}>Price / 1 hour: <span className={s.money}>{price_per_hour}$</span></span>
                                     </li>
                                 </ul>
-                                <svg className={s.iconHeart} width="26" height="26">
+                                <svg
+                                    onClick={() => { 
+                                        if (isAuth) {
+                                            dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));
+                                            console.log('add');
+                                        } else {
+                                            alert('no')
+                                        }
+                                    }}
+                                    className={s.iconHeart} width="26" height="26">
                                     <use href={`${svg}#heart`}></use>
                                 </svg>
                             </div>
@@ -107,7 +123,16 @@ const TeachersList = () => {
                                         <li key={uuidv4()} className={`${s.text} ${s.item}`}>#{el}</li>
                                 ))}
                             </ul>
-                            {indexHidden === index ? <button className={s.btnTrail} type="button">Book trial lesson</button> : null}
+                            {indexHidden === index ? <button className={s.btnTrail} type="button"
+                                onClick={() => {
+                                    setIsHidden(!isHidden);
+                                    setdataForTrail({
+                                        avatar_url,
+                                        name,
+                                        surname
+                                    })
+                                }}
+                            >Book trial lesson</button> : null}
                         </div>
                   </li>  
                 ))}
@@ -123,6 +148,7 @@ const TeachersList = () => {
                 :
                 null
             }
+            {isHidden ? null : <PopUpBookTrail dataTeacher={dataForTrail} setIsHidden={setIsHidden} setdataForTrail={setdataForTrail} />}
         </>
     );
 }

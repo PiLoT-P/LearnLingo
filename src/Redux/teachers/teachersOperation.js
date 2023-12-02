@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { database } from "../../firebase";
-import { get, ref } from "firebase/database";
+import { auth, database } from "../../firebase";
+import { get, push, ref, set } from "firebase/database";
 
 export const getDataTeachers = createAsyncThunk(
     'teachers/getData',
@@ -8,9 +8,27 @@ export const getDataTeachers = createAsyncThunk(
         try {
             const teachersRef = ref(database)
             const snapshot = await get(teachersRef);
-            const teachersData = snapshot.val()
+            const {teachers} = snapshot.val()
 
-            return teachersData;
+            return teachers;
+        } catch (err) {
+            console.error('Error fetching data:', err);
+            return thunkApi.rejectWithValue(err.message);
+        }
+    }
+)
+
+export const addTeacherToFavorites = createAsyncThunk(
+    'teachers/addToFavorites',
+    async (teacher, thunkApi) => {
+        const userId = auth.currentUser.uid;
+        try {
+            const favoritesRef = ref(database, `users/${userId}/favorites`);
+
+            const newFavoriteRef = push(favoritesRef);
+            await set(newFavoriteRef, teacher);
+
+            return teacher;
         } catch (err) {
             console.error('Error fetching data:', err);
             return thunkApi.rejectWithValue(err.message);

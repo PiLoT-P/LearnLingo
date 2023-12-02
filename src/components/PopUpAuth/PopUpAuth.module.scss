@@ -15,7 +15,7 @@
     transform: translate(-50%, -50%);
     z-index: 11;
 
-    width: 500px;
+    max-width: 500px;
     padding: 64px;
     border-radius: 30px;
     background: #FFF;
@@ -59,6 +59,11 @@
 
     padding-bottom: 40px;
 }
+
+.blockValidate{
+    width: 100%;
+}
+
 .input{
     width: 100%;
     padding: 16px;
@@ -124,4 +129,11 @@
 
 .isHidden{
     display: none;
+}
+
+.error{
+    color: rgba(255, 0, 0, 0.527);
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 5px;
 }

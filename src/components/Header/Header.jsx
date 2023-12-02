@@ -5,7 +5,7 @@ import svg from 'assets/icons/symbol-defs.svg'
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectorIsAuth, selectorName } from 'Redux/auth/authSelectors';
-import { logoutUser } from 'Redux/auth/authOperation';
+import { logoutUser } from '../../Redux/auth/authOperation';
 
 const Header = ({ onLigIn, onRegister, onIsHidden }) => {
     const isAuth = useSelector(selectorIsAuth);
