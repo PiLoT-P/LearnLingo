@@ -1,5 +1,5 @@
 const { createSlice } = require("@reduxjs/toolkit");
-const { getDataTeachers, addTeacherToFavorites } = require("./teachersOperation");
+const { getDataTeachers, addTeacherToFavorites, removeTeachersFromFavorites, getAllTeachersFromFavorites } = require("./teachersOperation");
 
 const teachersSlice = createSlice({
     name: 'teachers',
@@ -29,7 +29,13 @@ const teachersSlice = createSlice({
                 state.teachers = payload;
             })
             .addCase(addTeacherToFavorites.fulfilled, (state, { payload }) => {
-                console.log('addTeacher', payload);
+                state.favorites.push(payload);
+            })
+            .addCase(removeTeachersFromFavorites.fulfilled, (state, { payload }) => {
+                state.favorites = [];
+            })
+            .addCase(getAllTeachersFromFavorites.fulfilled, (state, { payload }) => {
+                state.favorites = payload;
             })
             .addMatcher(
                 (action) =>

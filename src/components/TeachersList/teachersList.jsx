@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { selectorIsAuth } from "Redux/auth/authSelectors";
-import { addTeacherToFavorites } from "Redux/teachers/teachersOperation";
+import { addTeacherToFavorites, removeTeachersFromFavorites } from "Redux/teachers/teachersOperation";
 import s from './TeachersList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
 import srcImage from '../../assets/image/9169253.jpg'
@@ -39,8 +39,8 @@ const TeachersList = () => {
     return (
         <>
             <ul className={s.mainList}>
-                {filteredTeachers.slice(0, visibleTechers).map(({avatar_url, conditions, experience, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
-                    <li key={`${index}_${surname}`} className={s.mainListItem}>
+                {filteredTeachers.slice(0, visibleTechers).map(({avatar_url, conditions, experience, id,languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
+                    <li key={id} className={s.mainListItem}>
                         <div className={s.blockAvatar}>
                             <svg className={s.iconDot} width="12" height="12">
                                 <use href={`${svg}#greenDot`}></use>
@@ -73,7 +73,7 @@ const TeachersList = () => {
                                 <svg
                                     onClick={() => { 
                                         if (isAuth) {
-                                            dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));
+                                            dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, id, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));
                                             console.log('add');
                                         } else {
                                             alert('no')

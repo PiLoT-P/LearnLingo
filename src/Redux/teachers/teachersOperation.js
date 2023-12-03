@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { auth, database } from "../../firebase";
-import { get, push, ref, set } from "firebase/database";
+import { child, get, push, ref, remove, set } from "firebase/database";
 
 export const getDataTeachers = createAsyncThunk(
     'teachers/getData',
@@ -23,12 +23,53 @@ export const addTeacherToFavorites = createAsyncThunk(
     async (teacher, thunkApi) => {
         const userId = auth.currentUser.uid;
         try {
-            const favoritesRef = ref(database, `users/${userId}/favorites`);
+            const favoritesRef = ref(database, `users/${userId}/favorites/${teacher.id}`);
 
-            const newFavoriteRef = push(favoritesRef);
-            await set(newFavoriteRef, teacher);
+            await set(favoritesRef, teacher);
 
             return teacher;
+        } catch (err) {
+            console.error('Error fetching data:', err);
+            return thunkApi.rejectWithValue(err.message);
+        }
+    }
+)
+
+export const removeTeachersFromFavorites = createAsyncThunk(
+    'teachers/removeFromFavorites',
+    async (id, thunkApi) => {
+        const userId = auth.currentUser.uid;
+        try {
+            const favoritesRef = ref(database, `users/${userId}/favorites`);
+
+            await remove(child(favoritesRef, id));
+            
+            return id;
+        } catch (err) {
+            console.error('Error fetching data:', err);
+            return thunkApi.rejectWithValue(err.message);
+        }
+    }
+)
+
+export const getAllTeachersFromFavorites = createAsyncThunk(
+    'teachers/getAllFromFavorites',
+    async (_, thunkApi) => {
+        const userId = auth.currentUser.uid;
+        try {
+            const favoritesRef = ref(database, `users/${userId}/favorites`);
+
+            const snapshot = await get(favoritesRef);
+            
+            const favoriteTeachers = [];
+            snapshot.forEach((childSnapshot) => {
+                favoriteTeachers.push({
+                id: childSnapshot.key,
+                ...childSnapshot.val(),
+                });
+            });
+
+            return favoriteTeachers;
         } catch (err) {
             console.error('Error fetching data:', err);
             return thunkApi.rejectWithValue(err.message);
