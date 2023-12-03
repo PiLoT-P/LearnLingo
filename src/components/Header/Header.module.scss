@@ -14,6 +14,13 @@
 .navigate{
     display: flex;
     gap: 28px;
+
+    .btn{
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        cursor: pointer;
+    }
 }
 
 .text{

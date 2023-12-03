@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { auth, database } from "../../firebase";
-import { child, get, push, ref, remove, set } from "firebase/database";
+import { child, get, ref, remove, set } from "firebase/database";
 
 export const getDataTeachers = createAsyncThunk(
     'teachers/getData',

@@ -1,16 +1,27 @@
 import { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { loginUser, registerUser } from "Redux/auth/authOperation";
 import { useFormik } from "formik";
 import s from './PopUpAuth.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg';
 import { validationSchemaLogIn } from "yup/validationSchemaLogIn";
 import { validationSchemaRegister } from "yup/validationSchemaRegister";
+import { NotificationContainer } from "react-notifications";
+import { errorNotification } from "notifications/notifications";
+import { selectorAuthError } from "Redux/auth/authSelectors";
+import { useEffect } from "react";
 
 
 const PopUpAuth = ({authType, isHidden, onIsHidden}) => {
     const dispatch = useDispatch();
+    const error = useSelector(selectorAuthError);
     const [passwordShow, setPasswordShow] = useState(false);
+
+    useEffect(() => {
+        if (error) {
+            errorNotification('You entered an incorrect email or password. There could also be issues on the server, please try again.', 'Error', 3000);
+        }
+    }, [error]);
 
     const formik = useFormik({
         initialValues: {
@@ -98,6 +109,7 @@ const PopUpAuth = ({authType, isHidden, onIsHidden}) => {
                     </form>
                 </div>
             </div>
+            <NotificationContainer/>
         </>
     );
 }

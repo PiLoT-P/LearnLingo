@@ -20,6 +20,9 @@ const teachersSlice = createSlice({
             filter.language = language;
             filter.level = level;
             filter.price = price;
+        },
+        cleanFavorites: (state, {payload}) => {
+            state.favorites = [];
         }
     },
     extraReducers: (builder) => {
@@ -32,7 +35,7 @@ const teachersSlice = createSlice({
                 state.favorites.push(payload);
             })
             .addCase(removeTeachersFromFavorites.fulfilled, (state, { payload }) => {
-                state.favorites = [];
+                state.favorites = state.favorites.filter(favorite => favorite.id !== payload);
             })
             .addCase(getAllTeachersFromFavorites.fulfilled, (state, { payload }) => {
                 state.favorites = payload;
@@ -63,5 +66,5 @@ const teachersSlice = createSlice({
     }
 })
 
-export const { changeFilter } = teachersSlice.actions;
+export const { changeFilter,  cleanFavorites } = teachersSlice.actions;
 export default teachersSlice.reducer;

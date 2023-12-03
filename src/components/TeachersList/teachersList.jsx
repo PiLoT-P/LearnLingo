@@ -1,4 +1,4 @@
-import { selectorFilter, selectorTeachers } from "Redux/teachers/teachersSelectors";
+import { selectorFavorites, selectorFilter, selectorTeachers } from "Redux/teachers/teachersSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
@@ -8,12 +8,15 @@ import s from './TeachersList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
 import srcImage from '../../assets/image/9169253.jpg'
 import PopUpBookTrail from "components/PopUpBookTrail/PopUpBookTrail";
+import { errorNotification } from "notifications/notifications";
+import { NotificationContainer } from "react-notifications";
 
 const TeachersList = () => {
     const dispatch = useDispatch();
     const teachersData = useSelector(selectorTeachers);
     const filter = useSelector(selectorFilter);
     const isAuth = useSelector(selectorIsAuth);
+    const favorites = useSelector(selectorFavorites);
     const [indexHidden, setIndexHidden] = useState(-1); 
     const [visibleTechers, setVisibleTeachers] = useState(4);
     const [isHidden, setIsHidden] = useState(true);
@@ -73,13 +76,16 @@ const TeachersList = () => {
                                 <svg
                                     onClick={() => { 
                                         if (isAuth) {
-                                            dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, id, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));
-                                            console.log('add');
+                                            if (favorites.some(favorite => favorite.id === id)) {
+                                                dispatch(removeTeachersFromFavorites(id));
+                                            } else {
+                                                dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, id, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));   
+                                            }
                                         } else {
-                                            alert('no')
+                                            errorNotification('First, log in or register', 'Error', 5000);
                                         }
                                     }}
-                                    className={s.iconHeart} width="26" height="26">
+                                    className={favorites.some(favorite => favorite.id === id) ? s.iconHeartUse: s.iconHeart} width="26" height="26">
                                     <use href={`${svg}#heart`}></use>
                                 </svg>
                             </div>
@@ -149,6 +155,7 @@ const TeachersList = () => {
                 null
             }
             {isHidden ? null : <PopUpBookTrail dataTeacher={dataForTrail} setIsHidden={setIsHidden} setdataForTrail={setdataForTrail} />}
+            <NotificationContainer/>
         </>
     );
 }
