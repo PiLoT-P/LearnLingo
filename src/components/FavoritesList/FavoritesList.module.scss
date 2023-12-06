@@ -1,0 +1,240 @@
+.mainList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+
+    margin-left: auto;
+    margin-right: auto;
+    // margin-bottom: 64px;
+}
+
+.mainListItem {
+    display: flex;
+    gap: 48px;
+    padding: 24px;
+    width: 100%;
+    max-width: 1184px;
+
+    background-color: #fff;
+    border-radius: 24px;
+}
+
+.text {
+    color: #121417;
+
+    font-family: 'Roboto';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.container {
+    width: 100%;
+}
+
+.blockAvatar {
+    position: relative;
+}
+
+.iconDot {
+    position: absolute;
+
+    top: 19px;
+    right: 23px;
+}
+
+.avatar {
+    border-radius: 50%;
+    padding: 12px;
+
+    border: 3px solid #FBE9BA;
+}
+
+.topBlock {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.textLanguages {
+    margin-right: auto;
+
+    color: #8A8A89;
+}
+
+.topList {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    margin-right: 64px;
+
+    .item {
+        display: flex;
+        align-items: center;
+    }
+
+    .item:not(:last-child)::after {
+        content: '';
+        border-radius: 1px rgba(18, 20, 23, 0.20);
+        background-color: rgba(18, 20, 23, 0.20);
+        height: 16px;
+        width: 1px;
+        margin-left: 16px;
+    }
+}
+
+.iconBook {
+    margin-right: 8px;
+}
+
+.iconStar {
+    margin-right: 8px;
+    fill: #FFC531;
+}
+
+.iconHeart {
+    cursor: pointer;
+    fill: transparent;
+    stroke: #121417;
+
+    &:hover {
+        fill: #FFC531;
+        stroke: none;
+    }
+}
+
+.iconHeartUse {
+    fill: #FFC531;
+    cursor: pointer;
+    stroke: none;
+}
+
+.money {
+    color: #38CD3E;
+}
+
+.nameSurname {
+    font-size: 24px;
+    line-height: 1;
+
+    margin-bottom: 32px;
+}
+
+.informationList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-bottom: 16px;
+
+    .item {
+        color: #8A8A89;
+
+        .textLanguages {
+            color: #121417;
+            text-decoration-line: underline;
+        }
+    }
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 32px;
+    padding: 0;
+    cursor: pointer;
+
+    text-decoration-line: underline;
+}
+
+.levelsList {
+    display: flex;
+    gap: 8px;
+
+    .item {
+        padding: 8px 12px;
+
+        border-radius: 35px;
+        border: 1px solid rgba(18, 20, 23, 0.20);
+
+        font-size: 14px;
+        line-height: 1.14;
+    }
+
+    .found {
+        background-color: #F4C550;
+        border: transparent;
+    }
+}
+
+.textExperience {
+    font-weight: 400;
+
+    margin-bottom: 32px;
+}
+
+.iconUser {
+    fill: black;
+    padding: 4px;
+    background-color: #c5c5c5;
+    border-radius: 50%;
+}
+
+.commentList {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    margin-bottom: 32px;
+
+    .container {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .name {
+        color: #8A8A89;
+        margin-bottom: 2px;
+    }
+
+    .blockRating {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .textRating {
+        color: #121417;
+
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.28;
+    }
+}
+
+.btnTrail {
+    display: flex;
+    padding: 16px 48px;
+    margin-top: 32px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    border: none;
+    border-radius: 12px;
+    background: #F4C550;
+
+    color: #121417;
+
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.55;
+}

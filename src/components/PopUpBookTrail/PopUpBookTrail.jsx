@@ -1,7 +1,23 @@
 import s from './PopUpBookTrail.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
+import { Field, useFormik } from 'formik';
+import { validationSchemaBookTrail } from 'yup/validationSchemaBojkTrail';
 
-const PopUpBookTrail = ({dataTeacher, setIsHidden, setdataForTrail}) => {
+const PopUpBookTrail = ({ dataTeacher, setIsHidden, setdataForTrail }) => {
+    
+    const formik = useFormik({
+        initialValues: {
+            reason: '',
+            name: '',
+            email: '',
+            phone: ''
+        },
+        onSubmit: (value) => {
+            console.log(value);
+        },
+        validationSchema: validationSchemaBookTrail,
+    })
+
     return (
         <>
             <div className={s.backdrop}>
@@ -19,14 +35,14 @@ const PopUpBookTrail = ({dataTeacher, setIsHidden, setdataForTrail}) => {
                         </div>
                     </div>
                     <p className={s.question}>What is your main reason for learning English?</p>
-                    <form action="">
+                    <form onSubmit={formik.handleSubmit}>
                         <div className={s.blockRadioInput}>
                             <label>
-                                <input
-                                    className={s.input}
+                                <Field
                                     type="radio"
                                     name="reason"
                                     value="Career and business"
+                                    className={s.input}
                                 />
                                 <svg className={s.iconChecked} width="20" height="20">
                                     <use href={`${svg}#checked`}></use>
@@ -34,12 +50,11 @@ const PopUpBookTrail = ({dataTeacher, setIsHidden, setdataForTrail}) => {
                                 Career and business
                             </label>
                             <label>
-                                <input
-                                    className={s.input}
+                                <Field
                                     type="radio"
                                     name="reason"
                                     value="Lesson for kids"
-                                    
+                                    className={s.input}
                                 />
                                 <svg className={s.iconChecked} width="20" height="20">
                                     <use href={`${svg}#checked`}></use>
@@ -47,11 +62,11 @@ const PopUpBookTrail = ({dataTeacher, setIsHidden, setdataForTrail}) => {
                                 Lesson for kids
                             </label>
                             <label>
-                                <input
-                                    className={s.input}
+                                <Field
                                     type="radio"
                                     name="reason"
                                     value="Living abroad"
+                                    className={s.input}
                                 />
                                 <svg className={s.iconChecked} width="20" height="20">
                                     <use href={`${svg}#checked`}></use>
@@ -59,11 +74,11 @@ const PopUpBookTrail = ({dataTeacher, setIsHidden, setdataForTrail}) => {
                                 Living abroad
                             </label>
                             <label>
-                                <input
-                                    className={s.input}
+                                <Field
                                     type="radio"
                                     name="reason"
                                     value="Exams and coursework"
+                                    className={s.input}
                                 />
                                 <svg className={s.iconChecked} width="20" height="20">
                                     <use href={`${svg}#checked`}></use>
@@ -71,11 +86,11 @@ const PopUpBookTrail = ({dataTeacher, setIsHidden, setdataForTrail}) => {
                                 Exams and coursework
                             </label>
                             <label>
-                                <input
-                                    className={s.input}
+                                <Field
                                     type="radio"
                                     name="reason"
                                     value="Culture, travel or hobby"
+                                    className={s.input}
                                 />
                                 <svg className={s.iconChecked} width="20" height="20">
                                     <use href={`${svg}#checked`}></use>
@@ -89,18 +104,27 @@ const PopUpBookTrail = ({dataTeacher, setIsHidden, setdataForTrail}) => {
                                 type="text"
                                 name='name'
                                 placeholder='Full Name'
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.name}
                             />
                             <input
                                 className={s.input}
                                 type="text"
                                 name='email'
                                 placeholder='Email'
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.email}
                             />
                             <input
                                 className={s.input}
                                 type="text"
                                 name='phone'
                                 placeholder='Phone number'
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.phone}
                             />
                         </div>
                         <button className={s.btn} type='submit'>Book</button>

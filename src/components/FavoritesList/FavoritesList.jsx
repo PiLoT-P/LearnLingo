@@ -1,48 +1,23 @@
-import { selectorFavorites, selectorFilter, selectorTeachers } from "Redux/teachers/teachersSelectors";
+import { selectorFavorites } from "Redux/teachers/teachersSelectors";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
-import { selectorIsAuth } from "Redux/auth/authSelectors";
 import { addTeacherToFavorites, removeTeachersFromFavorites } from "Redux/teachers/teachersOperation";
-import s from './TeachersList.module.scss';
-import svg from '../../assets/icons/symbol-defs.svg'
-import srcImage from '../../assets/image/9169253.jpg'
+import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
 import PopUpBookTrail from "components/PopUpBookTrail/PopUpBookTrail";
-import { errorNotification } from "notifications/notifications";
-import { NotificationContainer } from "react-notifications";
+import s from './FavoritesList.module.scss';
+import svg from '../../assets/icons/symbol-defs.svg';
 
-const TeachersList = () => {
+const FavoritesList = () => {
     const dispatch = useDispatch();
-    const teachersData = useSelector(selectorTeachers);
-    const filter = useSelector(selectorFilter);
-    const isAuth = useSelector(selectorIsAuth);
-    const favorites = useSelector(selectorFavorites);
-    const [indexHidden, setIndexHidden] = useState(-1); 
-    const [visibleTechers, setVisibleTeachers] = useState(4);
+    const dataFavorites = useSelector(selectorFavorites);
     const [isHidden, setIsHidden] = useState(true);
-    const [dataForTrail, setDataForTrail] = useState(null)
+    const [indexHidden, setIndexHidden] = useState(-1); 
+    const [dataForTrail, setDataForTrail] = useState(null);
 
-    useEffect(() =>{
-        setVisibleTeachers(4);
-    }, [filter]);
-
-    const handleLoadMore = (e) => {
-        setVisibleTeachers((prevVisibleTeaches) => prevVisibleTeaches + 4);
-    }
-
-    const filteredTeachers = teachersData
-        .filter(({ languages, levels, price_per_hour }) => {
-            const languageMatch = filter.language ? languages.includes(filter.language) : true;
-            const levelMatch = filter.level ? levels.includes(filter.level) : true;
-            const priceMatch = filter.price ? price_per_hour === filter.price : true;
-
-            return languageMatch && levelMatch && priceMatch;
-        })
-    
     return (
         <>
             <ul className={s.mainList}>
-                {filteredTeachers.slice(0, visibleTechers).map(({avatar_url, conditions, experience, id,languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
+                {dataFavorites.map(({avatar_url, conditions, experience, id,languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
                     <li key={id} className={s.mainListItem}>
                         <div className={s.blockAvatar}>
                             <svg className={s.iconDot} width="12" height="12">
@@ -75,17 +50,13 @@ const TeachersList = () => {
                                 </ul>
                                 <svg
                                     onClick={() => { 
-                                        if (isAuth) {
-                                            if (favorites.some(favorite => favorite.id === id)) {
-                                                dispatch(removeTeachersFromFavorites(id));
-                                            } else {
-                                                dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, id, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));   
-                                            }
+                                        if (dataFavorites.some(favorite => favorite.id === id)) {
+                                            dispatch(removeTeachersFromFavorites(id));
                                         } else {
-                                            errorNotification('First, log in or register', 'Error', 5000);
+                                            dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, id, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));   
                                         }
                                     }}
-                                    className={favorites.some(favorite => favorite.id === id) ? s.iconHeartUse: s.iconHeart} width="26" height="26">
+                                    className={dataFavorites.some(favorite => favorite.id === id) ? s.iconHeartUse: s.iconHeart} width="26" height="26">
                                     <use href={`${svg}#heart`}></use>
                                 </svg>
                             </div>
@@ -125,7 +96,7 @@ const TeachersList = () => {
                             }
                             <ul className={s.levelsList}>
                                 {levels.map((el, id) => (
-                                    el.includes(filter.level) ? <li key={uuidv4()} className={`${s.text} ${s.item} ${s.found}`}>#{el}</li> :
+                                    // el.includes(filter.level) ? <li key={uuidv4()} className={`${s.text} ${s.item} ${s.found}`}>#{el}</li> :
                                         <li key={uuidv4()} className={`${s.text} ${s.item}`}>#{el}</li>
                                 ))}
                             </ul>
@@ -141,23 +112,12 @@ const TeachersList = () => {
                             >Book trial lesson</button> : null}
                         </div>
                   </li>  
-                ))}
+                ))
+                }
             </ul>
-            {filteredTeachers.length <= visibleTechers ? null :
-                <button type="button" className={s.btnLoadMore} onClick={() => handleLoadMore()}>Load more</button>
-            }
-            {filteredTeachers.length < 1 ? 
-                <div className={s.blockErrorImg}>
-                    <img className={s.img} width='530px' height='530px' src={srcImage} alt="art" />
-                    <span className={s.text}>Not found teachers</span>
-                </div>
-                :
-                null
-            }
             {isHidden ? null : <PopUpBookTrail dataTeacher={dataForTrail} setIsHidden={setIsHidden} setdataForTrail={setDataForTrail} />}
-            <NotificationContainer/>
         </>
     );
 }
 
-export default TeachersList;
+export default FavoritesList;
