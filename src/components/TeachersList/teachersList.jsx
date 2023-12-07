@@ -19,7 +19,7 @@ const TeachersList = () => {
     const isAuth = useSelector(selectorIsAuth);
     const favorites = useSelector(selectorFavorites);
     const theme = useSelector(selectorTheme);
-    const [indexHidden, setIndexHidden] = useState(-1); 
+    const [indexHidden, setIndexHidden] = useState(-1);
     const [visibleTechers, setVisibleTeachers] = useState(4);
     const [isHidden, setIsHidden] = useState(true);
     const [dataForTrail, setDataForTrail] = useState(null)
@@ -76,12 +76,12 @@ const TeachersList = () => {
                                     </li>
                                 </ul>
                                 <svg
-                                    onClick={() => { 
+                                    onClick={() => {
                                         if (isAuth) {
                                             if (favorites.some(favorite => favorite.id === id)) {
                                                 dispatch(removeTeachersFromFavorites(id));
                                             } else {
-                                                dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, id, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));   
+                                                dispatch(addTeacherToFavorites({ avatar_url, conditions, experience, id, languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname }));
                                             }
                                         } else {
                                             errorNotification('First, log in or register', 'Error', 5000);
@@ -98,7 +98,7 @@ const TeachersList = () => {
                                 <li className={`${s.text} ${s.item}`}>Conditions: <span  className={s.text}>{conditions}</span></li>
                             </ul>
                             {indexHidden === -1 || indexHidden < index || indexHidden > index ? <button type="button"  className={`${s.text} ${s.btn}`} onClick={() => {setIndexHidden(index); }}>Read more</button> : null}
-                            {indexHidden === index ? 
+                            {indexHidden === index ?
                                 <div className={s.hiddenBlock}>
                                     <p className={`${s.text} ${s.textExperience}`}>{experience}</p>
                                     <ul className={s.commentList}>
@@ -142,13 +142,13 @@ const TeachersList = () => {
                                 }}
                             >Book trial lesson</button> : null}
                         </div>
-                  </li>  
+                  </li>
                 ))}
             </ul>
             {filteredTeachers.length <= visibleTechers ? null :
                 <button type="button" className={clsx(s.btnLoadMore, s[theme])} onClick={() => handleLoadMore()}>Load more</button>
             }
-            {filteredTeachers.length < 1 ? 
+            {filteredTeachers.length < 1 ?
                 <div className={s.blockErrorImg}>
                     <img className={s.img} width='530px' height='530px' src={srcImage} alt="art" />
                     <span className={s.text}>Not found teachers</span>

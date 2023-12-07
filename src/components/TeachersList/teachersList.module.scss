@@ -179,7 +179,7 @@
 
         border-radius: 35px;
         border: 1px solid rgba(18, 20, 23, 0.20);
-        
+
         font-size: 14px;
         line-height: 1.14;
     }
@@ -212,7 +212,7 @@
 
 .textExperience{
     font-weight: 400;
-    
+
     margin-bottom: 32px;
 }
 
@@ -249,7 +249,7 @@
     }
     .textRating{
         color: $textColor;
-        
+
         font-family: 'Roboto';
         font-size: 14px;
         font-style: normal;
@@ -271,7 +271,7 @@
     background: $colorYellow;
 
     color: $textColor;
-    
+
     font-family: 'Roboto';
     font-size: 18px;
     font-style: normal;
@@ -337,7 +337,7 @@
     border: none;
 
     color: $textColor;
-    
+
     font-family: 'Roboto';
     font-size: 18px;
     font-style: normal;
@@ -363,7 +363,7 @@
     &.Coral {
         background-color: $colorCoral;
     }
-    
+
     &:hover {
         &.Yellow {
             background-color: $hoverColorYellow;
