@@ -1,5 +1,5 @@
-import TeachersFilter from "components/TeachersFilter/TeachersFilter";
-import TeachersList from "components/TeachersList/TeachersList";
+import TeachersFilter from "../../components/TeachersFilter/TeachersFilter";
+import TeachersList from "../../components/TeachersList/TeachersList";
 
 
 const Teachers = () => {
