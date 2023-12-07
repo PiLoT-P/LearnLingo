@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { selectorIsAuth, selectorTheme } from "Redux/auth/authSelectors";
 import { addTeacherToFavorites, removeTeachersFromFavorites } from "Redux/teachers/teachersOperation";
-import s from './TeachersList.module.scss';
+import s from './TeachersListTwo.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
 import srcImage from '../../assets/image/9169253.jpg'
 import PopUpBookTrail from "components/PopUpBookTrail/PopUpBookTrail";
