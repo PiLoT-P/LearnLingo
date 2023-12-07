@@ -1,10 +1,32 @@
+@import '../../assets/styles/vars';
+
 .container{
     max-width: 1312px;
     margin-left: auto;
     margin-right: auto;
 
     border-radius: 30px;
-    border: 1.5px dashed #F4C550;
+    border: 3px dashed $colorYellow;
+
+    &.Yellow {
+        border-color: $colorYellow;
+    }
+
+    &.Green {
+        border-color: $colorGreen;
+    }
+
+    &.Blue {
+        border-color: $colorBlue;
+    }
+
+    &.Pink {
+        border-color: $colorPink;
+    }
+
+    &.Coral {
+        border-color: $colorCoral;
+    }
 }
 .list{
     padding: 40px 123px;
@@ -18,7 +40,7 @@
     gap: 16px;
 }
 .number{
-    color: #121417;
+    $textColor: $textColor;
     
     font-family: 'Roboto';
     font-size: 28px;
@@ -28,7 +50,7 @@
     letter-spacing: -0.56px;
 }
 .text{
-    color: rgba(18, 20, 23, 0.70);
+    color: $secondTextColor;
     
     font-family: 'Roboto';
     font-size: 14px;

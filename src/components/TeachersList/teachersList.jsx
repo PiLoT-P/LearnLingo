@@ -2,7 +2,7 @@ import { selectorFavorites, selectorFilter, selectorTeachers } from "Redux/teach
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { selectorIsAuth } from "Redux/auth/authSelectors";
+import { selectorIsAuth, selectorTheme } from "Redux/auth/authSelectors";
 import { addTeacherToFavorites, removeTeachersFromFavorites } from "Redux/teachers/teachersOperation";
 import s from './TeachersList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg'
@@ -10,6 +10,7 @@ import srcImage from '../../assets/image/9169253.jpg'
 import PopUpBookTrail from "components/PopUpBookTrail/PopUpBookTrail";
 import { errorNotification } from "notifications/notifications";
 import { NotificationContainer } from "react-notifications";
+import clsx from "clsx";
 
 const TeachersList = () => {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const TeachersList = () => {
     const filter = useSelector(selectorFilter);
     const isAuth = useSelector(selectorIsAuth);
     const favorites = useSelector(selectorFavorites);
+    const theme = useSelector(selectorTheme);
     const [indexHidden, setIndexHidden] = useState(-1); 
     const [visibleTechers, setVisibleTeachers] = useState(4);
     const [isHidden, setIsHidden] = useState(true);
@@ -48,7 +50,7 @@ const TeachersList = () => {
                             <svg className={s.iconDot} width="12" height="12">
                                 <use href={`${svg}#greenDot`}></use>
                             </svg>
-                            <img width='120px' height='120px' src={avatar_url} alt="avatar teacher" className={s.avatar} />
+                            <img width='120px' height='120px' src={avatar_url} alt="avatar teacher" className={clsx(s.avatar, s[theme])} />
                         </div>
                         <div className={s.container}>
                             <div className={s.topBlock}>
@@ -125,11 +127,11 @@ const TeachersList = () => {
                             }
                             <ul className={s.levelsList}>
                                 {levels.map((el, id) => (
-                                    el.includes(filter.level) ? <li key={uuidv4()} className={`${s.text} ${s.item} ${s.found}`}>#{el}</li> :
+                                    el.includes(filter.level) ? <li key={uuidv4()} className={`${s.text} ${s.item} ${clsx(s.found, s[theme])}`}>#{el}</li> :
                                         <li key={uuidv4()} className={`${s.text} ${s.item}`}>#{el}</li>
                                 ))}
                             </ul>
-                            {indexHidden === index ? <button className={s.btnTrail} type="button"
+                            {indexHidden === index ? <button className={clsx(s.btnTrail, s[theme])} type="button"
                                 onClick={() => {
                                     setIsHidden(!isHidden);
                                     setDataForTrail({
@@ -144,7 +146,7 @@ const TeachersList = () => {
                 ))}
             </ul>
             {filteredTeachers.length <= visibleTechers ? null :
-                <button type="button" className={s.btnLoadMore} onClick={() => handleLoadMore()}>Load more</button>
+                <button type="button" className={clsx(s.btnLoadMore, s[theme])} onClick={() => handleLoadMore()}>Load more</button>
             }
             {filteredTeachers.length < 1 ? 
                 <div className={s.blockErrorImg}>

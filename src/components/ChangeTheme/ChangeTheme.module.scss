@@ -1,0 +1,86 @@
+@import '../../assets/styles/vars';
+
+.container{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    padding: 0;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    color: $textColor;
+    font-family: 'Roboto';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.list{
+    display: none;
+    padding: 10px;
+    position: absolute;
+    top: 31px;
+    z-index: 1;
+
+    border: 1px solid $colorYellow;
+    border-radius: 10px;
+    background-color: white;
+
+    &.Yellow{border-color: $colorYellow ;}
+    &.Green{border-color: $colorGreen;}
+    &.Blue{border-color: $colorBlue;}
+    &.Pink{border-color: $colorPink;}
+    &.Coral{border-color: $colorCoral;}
+
+    .btn:hover+& {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        width: 80px;
+    }
+
+    &:hover {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        width: 80px;
+    }
+
+    .item{
+        width: 100%;
+        padding: 3px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+
+        &:hover {
+            &.Yellow {
+                background-color: $hoverColorYellow;
+            }
+            &.Green {
+                background-color: $hoverColorGreen;
+            }
+            &.Blue {
+                background-color: $hoverColorblue;
+            }
+            &.Pink {
+                background-color: $hoverColorPink;
+            }
+            &.Coral {
+                background-color: $hoverColorCoral;
+            }
+        }
+    }
+}
+

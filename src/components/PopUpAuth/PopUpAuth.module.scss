@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars';
+
 .backContainer{
     width: 100%;
     height: 100%;
@@ -24,7 +26,7 @@
 .title{
     margin-bottom: 20px;
 
-    color: #121417;
+    color: $textColor;
     
     font-family: 'Roboto';
     font-size: 40px;
@@ -36,7 +38,7 @@
 .text{
     padding-bottom: 40px;
 
-    color: rgba(18, 20, 23, 0.80);
+    color: $secondTextColor;
     
     font-family: 'Roboto';
     font-size: 16px;
@@ -50,7 +52,7 @@
     right: 20px;
     cursor: pointer;
 
-    fill: #121417;
+    fill: $textColor;
 }
 .containerInput{
     display: flex;
@@ -70,7 +72,7 @@
     border-radius: 12px;
     border: 1px solid rgba(18, 20, 23, 0.10);
 
-    color: #121417;
+    color: $textColor;
     
     font-family: 'Roboto';
     font-size: 16px;
@@ -79,7 +81,7 @@
     line-height: 1.37;
 
     &::placeholder{
-        color: #121417;
+        color: $textColor;
         
         font-family: 'Roboto';
         font-size: 16px;
@@ -89,7 +91,27 @@
     }
     &:focus-visible{
         outline: none;
-        border-color: #F4C550;
+        border-color: $colorYellow;
+
+        &.Yellow {
+            border-color: $colorYellow;
+        }
+    
+        &.Green {
+            border-color: $colorGreen;
+        }
+    
+        &.Blue {
+            border-color: $colorBlue;
+        }
+    
+        &.Pink {
+            border-color: $colorPink;
+        }
+    
+        &.Coral {
+            border-color: $colorCoral;
+        }
     }
 
 }
@@ -105,7 +127,7 @@
     right: 18px;
     cursor: pointer;
 
-    fill: #121417;
+    fill: $textColor;
 }
 
 .btn{
@@ -115,16 +137,58 @@
 
     border: none;
     border-radius: 12px;
-    background: #F4C550;
+    background: $colorYellow;
     cursor: pointer;
 
-    color: #121417;
+    color: $textColor;
     
     font-family: 'Roboto';
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 1.55;
+
+    &.Yellow {
+        background-color: $colorYellow;
+    }
+
+    &.Green {
+        background-color: $colorGreen;
+    }
+
+    &.Blue {
+        background-color: $colorBlue;
+    }
+
+    &.Pink {
+        background-color: $colorPink;
+    }
+
+    &.Coral {
+        background-color: $colorCoral;
+    }
+
+    &:hover{
+        &.Yellow {
+            background-color: $hoverColorYellow;
+        }
+    
+        &.Green {
+            background-color: $hoverColorGreen;
+        }
+    
+        &.Blue {
+            background-color: $hoverColorblue;
+        }
+    
+        &.Pink {
+            background-color: $hoverColorPink;
+        }
+    
+        &.Coral {
+            background-color: $hoverColorCoral;
+        }
+    }
 }
 
 .isHidden{
@@ -132,7 +196,7 @@
 }
 
 .error{
-    color: rgba(255, 0, 0, 0.527);
+    color: $errorColor;
     font-size: 14px;
     margin-top: 5px;
     margin-left: 5px;

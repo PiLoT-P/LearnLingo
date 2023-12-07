@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars';
+
 .sectionHero{
     margin-left: auto;
     margin-right: auto;
@@ -17,12 +19,12 @@
     max-width: 720px;
 
     border-radius: 30px;
-    background: #F8F8F8;
+    background: $bgHeroColorContainer;
 }
 .title{
     margin-bottom: 32px;
 
-    color: #121417;
+    color: $textColor;
     
     font-family: 'Roboto';
     font-size: 48px;
@@ -32,16 +34,40 @@
     letter-spacing: -0.96px;
 }
 .variableText{
-    background-color: #FBE9BA;
+    padding-right: 10px;
 
     font-style: italic;
     font-weight: 400;
+
+    border-radius: 10px;
+
+    background-color: $hoverColorYellow;
+
+    &.Yellow {
+        background-color: $hoverColorYellow;
+    }
+
+    &.Green {
+        background-color: $hoverColorGreen;
+    }
+
+    &.Blue {
+        background-color: $hoverColorblue;
+    }
+
+    &.Pink {
+        background-color: $hoverColorPink;
+    }
+
+    &.Coral {
+        background-color: $hoverColorCoral;
+    }
 }
 .text{
     max-width: 471px;
     margin-bottom: 64px;
 
-    color: #121417;
+    color: $textColor;
     
     font-family: 'Roboto';
     font-size: 16px;
@@ -57,8 +83,8 @@
     padding: 16px 88px;
     border-radius: 12px;
 
-    background: #F4C550;
-    color: #121417;
+    background: $colorYellow;
+    color: $textColor;
     
     font-family: 'Roboto';
     font-size: 18px;
@@ -66,10 +92,46 @@
     font-weight: 700;
     line-height: 1.5;
 
-}
-.containerHeroImg{
+    &.Yellow {
+        background-color: $colorYellow;
+    }
 
-}
-.img{
+    &.Green {
+        background-color: $colorGreen;
+    }
+
+    &.Blue {
+        background-color: $colorBlue;
+    }
+
+    &.Pink {
+        background-color: $colorPink;
+    }
+
+    &.Coral {
+        background-color: $colorCoral;
+    }
+
+    &:hover{
+        &.Yellow {
+            background-color: $hoverColorYellow;
+        }
+    
+        &.Green {
+            background-color: $hoverColorGreen;
+        }
+    
+        &.Blue {
+            background-color: $hoverColorblue;
+        }
+    
+        &.Pink {
+            background-color: $hoverColorPink;
+        }
+    
+        &.Coral {
+            background-color: $hoverColorCoral;
+        }
+    }
 
 }

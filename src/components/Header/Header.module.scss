@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars';
+
 .header{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -24,7 +26,7 @@
 }
 
 .text{
-    color: #121417;
+    color: $textColor;
     font-family: 'Roboto';
     font-size: 16px;
     font-style: normal;
@@ -45,15 +47,56 @@
     padding: 0;
     border: none;
     background-color: transparent;
+    
 }
 .logIn .text{
     font-weight: 700;
 }
 .iconLogIn{
-    stroke: #F4C550;
+    stroke: $colorYellow;
+
+    &.Yellow {
+        stroke: $colorYellow;
+    }
+
+    &.Green {
+        stroke: $colorGreen;
+    }
+
+    &.Blue {
+        stroke: $colorBlue;
+    }
+
+    &.Pink {
+        stroke: $colorPink;
+    }
+
+    &.Coral {
+        stroke: $colorCoral;
+    }
 }
 .iconLogOut{
-    fill: #F4C550;
+    fill: $colorYellow;
+
+    &.Yellow {
+        fill: $colorYellow;
+    }
+
+    &.Green {
+        fill: $colorGreen;
+    }
+
+    &.Blue {
+        fill: $colorBlue;
+    }
+
+    &.Pink {
+        fill: $colorPink;
+    }
+
+    &.Coral {
+        fill: $colorCoral;
+    }
 }
 
 .textGL{
@@ -61,9 +104,29 @@
     align-items: center;
     justify-content: center;
     width: 157px;
-    background-color: #FFDC86;
+    background-color: $colorYellow;
     border-radius: 12px;
     font-weight: 700;
+
+    &.Yellow {
+        background-color: $colorYellow;
+    }
+
+    &.Green {
+        background-color: $colorGreen;
+    }
+
+    &.Blue {
+        background-color: $colorBlue;
+    }
+
+    &.Pink {
+        background-color: $colorPink;
+    }
+
+    &.Coral {
+        background-color: $colorCoral;
+    }
 }
 
 .register{
@@ -71,7 +134,7 @@
     padding: 14px 39px;
     border-width: 0;
     border-radius: 12px;
-    background: #121417;
+    background: $textColor;
 }
 
 .register .text{

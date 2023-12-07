@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars';
+
 .container{
     display: flex;
     align-items: center;
@@ -11,7 +13,7 @@
 }
 
 .text{
-    color: #121417;
+    color: $textColor;
     
     font-family: 'Roboto';
     font-size: 18px;
@@ -23,7 +25,7 @@
 .label{
     margin-bottom: 8px;
 
-    color: #8A8A89;
+    color: $thirdTextColor;
     
     font-family: 'Roboto';
     font-size: 14px;

@@ -6,10 +6,13 @@ import { useState } from "react";
 import PopUpBookTrail from "components/PopUpBookTrail/PopUpBookTrail";
 import s from './FavoritesList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg';
+import { selectorTheme } from "Redux/auth/authSelectors";
+import clsx from "clsx";
 
 const FavoritesList = () => {
     const dispatch = useDispatch();
     const dataFavorites = useSelector(selectorFavorites);
+    const theme = useSelector(selectorTheme);
     const [isHidden, setIsHidden] = useState(true);
     const [indexHidden, setIndexHidden] = useState(-1); 
     const [dataForTrail, setDataForTrail] = useState(null);
@@ -23,7 +26,7 @@ const FavoritesList = () => {
                             <svg className={s.iconDot} width="12" height="12">
                                 <use href={`${svg}#greenDot`}></use>
                             </svg>
-                            <img width='120px' height='120px' src={avatar_url} alt="avatar teacher" className={s.avatar} />
+                            <img width='120px' height='120px' src={avatar_url} alt="avatar teacher" className={clsx(s.avatar, s[theme])} />
                         </div>
                         <div className={s.container}>
                             <div className={s.topBlock}>
@@ -100,7 +103,7 @@ const FavoritesList = () => {
                                         <li key={uuidv4()} className={`${s.text} ${s.item}`}>#{el}</li>
                                 ))}
                             </ul>
-                            {indexHidden === index ? <button className={s.btnTrail} type="button"
+                            {indexHidden === index ? <button className={clsx(s.btnTrail, s[theme])} type="button"
                                 onClick={() => {
                                     setIsHidden(!isHidden);
                                     setDataForTrail({

@@ -7,6 +7,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 
+const PrivateRoute = ({ component, redirectTo = "/home" }) => {
+  const isAuth = useSelector(selectorIsAuth);
+
+  return isAuth ? component : <Navigate to={redirectTo} />;
+};
+
+
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -26,8 +33,8 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/home" element={<Home/>} />
-        <Route path="/teachers" element={<Teachers/>} />
-        <Route path="/favorites" element={<Favorites/>} />
+        <Route path="/teachers" element={<Teachers />}/>
+        <Route path="/favorites" element={<PrivateRoute component={<Favorites/>} />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </>

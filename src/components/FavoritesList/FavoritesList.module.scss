@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars';
+
 .mainList {
     display: flex;
     flex-direction: column;
@@ -6,7 +8,6 @@
 
     margin-left: auto;
     margin-right: auto;
-    // margin-bottom: 64px;
 }
 
 .mainListItem {
@@ -21,7 +22,7 @@
 }
 
 .text {
-    color: #121417;
+    color: $textColor;
 
     font-family: 'Roboto';
     font-size: 16px;
@@ -49,7 +50,27 @@
     border-radius: 50%;
     padding: 12px;
 
-    border: 3px solid #FBE9BA;
+    border: 3px solid $hoverColorYellow;
+
+    &.Yellow {
+        border-color: $hoverColorYellow ;
+    }
+
+    &.Green {
+        border-color: $hoverColorGreen;
+    }
+
+    &.Blue {
+        border-color: $hoverColorblue;
+    }
+
+    &.Pink {
+        border-color: $hoverColorPink;
+    }
+
+    &.Coral {
+        border-color: $hoverColorCoral;
+    }
 }
 
 .topBlock {
@@ -60,7 +81,7 @@
 .textLanguages {
     margin-right: auto;
 
-    color: #8A8A89;
+    color: $thirdTextColor;
 }
 
 .topList {
@@ -91,28 +112,28 @@
 
 .iconStar {
     margin-right: 8px;
-    fill: #FFC531;
+    fill: $starColro;
 }
 
 .iconHeart {
     cursor: pointer;
     fill: transparent;
-    stroke: #121417;
+    stroke: $textColor;
 
     &:hover {
-        fill: #FFC531;
+        fill: $starColro;
         stroke: none;
     }
 }
 
 .iconHeartUse {
-    fill: #FFC531;
+    fill: $starColro;
     cursor: pointer;
     stroke: none;
 }
 
 .money {
-    color: #38CD3E;
+    color: $moneyColor;
 }
 
 .nameSurname {
@@ -130,10 +151,10 @@
     margin-bottom: 16px;
 
     .item {
-        color: #8A8A89;
+        color: $thirdTextColor;
 
         .textLanguages {
-            color: #121417;
+            color: $textColor;
             text-decoration-line: underline;
         }
     }
@@ -164,8 +185,28 @@
     }
 
     .found {
-        background-color: #F4C550;
+        background-color: $colorYellow;
         border: transparent;
+
+        &.Yellow {
+            background-color: $colorYellow ;
+        }
+    
+        &.Green {
+            background-color: $colorGreen;
+        }
+    
+        &.Blue {
+            background-color: $colorBlue;
+        }
+    
+        &.Pink {
+            background-color: $colorPink;
+        }
+    
+        &.Coral {
+            background-color: $colorCoral;
+        }
     }
 }
 
@@ -196,7 +237,7 @@
     }
 
     .name {
-        color: #8A8A89;
+        color: $thirdTextColor;
         margin-bottom: 2px;
     }
 
@@ -208,7 +249,7 @@
     }
 
     .textRating {
-        color: #121417;
+        color: $textColor;
 
         font-family: 'Roboto';
         font-size: 14px;
@@ -228,13 +269,55 @@
 
     border: none;
     border-radius: 12px;
-    background: #F4C550;
+    background: $colorYellow;
 
-    color: #121417;
+    color: $textColor;
 
     font-family: 'Roboto';
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 1.55;
+
+    &.Yellow {
+        background-color: $colorYellow;
+    }
+
+    &.Green {
+        background-color: $colorGreen;
+    }
+
+    &.Blue {
+        background-color: $colorBlue;
+    }
+
+    &.Pink {
+        background-color: $colorPink;
+    }
+
+    &.Coral {
+        background-color: $colorCoral;
+    }
+
+    &:hover {
+        &.Yellow {
+            background-color: $hoverColorYellow;
+        }
+
+        &.Green {
+            background-color: $hoverColorGreen;
+        }
+
+        &.Blue {
+            background-color: $hoverColorblue;
+        }
+
+        &.Pink {
+            background-color: $hoverColorPink;
+        }
+
+        &.Coral {
+            background-color: $hoverColorCoral;
+        }
+    }
 }

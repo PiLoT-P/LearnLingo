@@ -1,8 +1,13 @@
+import { selectorTheme } from 'Redux/auth/authSelectors';
 import s from './Footer.module.scss'
+import { useSelector } from 'react-redux';
+import { clsx } from 'clsx';
 
 const Footer = () => {
+    const theme = useSelector(selectorTheme);
+
     return (
-        <footer className={s.container}>
+        <footer className={clsx(s.container, s[theme])}>
             <ul className={s.list}>
                 <li className={s.item}>
                     <span className={s.number}>32,000 +</span>

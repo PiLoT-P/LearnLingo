@@ -9,11 +9,14 @@ const authSlice = createSlice({
         isAuth: false,
         email: null,
         name: null,
+        theme: null,
         isLoading: false,
         error: null,
     },
     reducers:{
-
+        changeTheme: (state, {payload}) => {
+            state.theme = payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -65,4 +68,6 @@ const authSlice = createSlice({
     }
 })
 
+
+export const { changeTheme } = authSlice.actions;
 export default authSlice.reducer;
