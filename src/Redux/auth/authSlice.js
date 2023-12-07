@@ -38,6 +38,7 @@ const authSlice = createSlice({
                     isAuth: false,
                     email: null,
                     name: null,
+                    theme: null,
                     isLoading: false,
                     error: null,
                 }
