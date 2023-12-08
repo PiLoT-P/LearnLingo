@@ -299,6 +299,7 @@
     }
 
     &:hover {
+        background-color: $hoverColorYellow;
         &.Yellow {
             background-color: $hoverColorYellow;
         }
@@ -365,6 +366,7 @@
     }
 
     &:hover {
+        background-color: $hoverColorYellow;
         &.Yellow {
             background-color: $hoverColorYellow;
         }

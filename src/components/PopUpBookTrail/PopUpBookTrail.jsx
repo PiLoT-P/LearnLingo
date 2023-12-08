@@ -1,13 +1,23 @@
-import s from './PopUpBookTrail.module.scss';
-import svg from '../../assets/icons/symbol-defs.svg'
 import { validationSchemaBookTrail } from 'yup/validationSchemaBojkTrail';
-import FormikWrapper from 'formik/formik';
-import clsx from 'clsx';
 import { selectorTheme } from 'Redux/auth/authSelectors';
 import { useSelector } from 'react-redux';
+import s from './PopUpBookTrail.module.scss';
+import svg from '../../assets/icons/symbol-defs.svg';
+import FormikWrapper from 'formik/formik';
+import clsx from 'clsx';
+import { useEffect } from 'react';
 
 const PopUpBookTrail = ({ dataTeacher, setIsHidden, setdataForTrail }) => {
     const theme = useSelector(selectorTheme);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setIsHidden(true);
+            }
+        }
+        document.addEventListener('keydown', handleKeyDown);
+    }, [setIsHidden])
 
     const onSubmit = (values) => {
         console.log(values);
@@ -22,7 +32,9 @@ const PopUpBookTrail = ({ dataTeacher, setIsHidden, setdataForTrail }) => {
         >
             {(formik) => {
                 return(<>
-                    <div className={s.backdrop}>
+                    <div className={s.backdrop} onClick={(e) => {
+                        if (e.target.className.includes('backdrop')) { setIsHidden(true)} 
+                    }}>
                         <div className={s.container}>
                             <svg className={s.iconExit} width="32" height="32" onClick={() => { setIsHidden(true); setdataForTrail(null); }}>
                                 <use href={`${svg}#exit`}></use>
@@ -116,33 +128,42 @@ const PopUpBookTrail = ({ dataTeacher, setIsHidden, setdataForTrail }) => {
                                     </label>
                                 </div>
                                 <div className={s.blockTextInput}>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Full Name"
-                                        className={clsx(s.input, s[theme])}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.name}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        placeholder="Email"
-                                        className={clsx(s.input, s[theme])}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.email}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="phone"
-                                        placeholder="Phone number"
-                                        className={clsx(s.input, s[theme])}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.phone}
-                                    />
+                                    <div className={s.validateBlock}>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder="Full Name"
+                                            className={clsx(s.input, s[theme])}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.name}
+                                        />
+                                        {formik.touched.name && formik.errors.name && <div className={s.error}>{formik.errors.name}</div>}
+                                    </div>
+                                    <div className={s.validateBlock}>
+                                        <input
+                                            type="text"
+                                            name="email"
+                                            placeholder="Email"
+                                            className={clsx(s.input, s[theme])}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.email}
+                                        />
+                                        {formik.touched.email && formik.errors.email && <div className={s.error}>{formik.errors.email}</div>}
+                                    </div>
+                                    <div className={s.validateBlock}>
+                                        <input
+                                            type="text"
+                                            name="phone"
+                                            placeholder="Phone number"
+                                            className={clsx(s.input, s[theme])}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.phone}
+                                        />
+                                        {formik.touched.phone && formik.errors.phone && <div className={s.error}>{formik.errors.phone}</div>}
+                                    </div>
                                 </div>
                                 <button className={clsx(s.btn, s[theme])} type='submit'>Book</button>
                             </form>

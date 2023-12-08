@@ -23,7 +23,14 @@ const PopUpAuth = ({authType, isHidden, onIsHidden}) => {
         if (error) {
             errorNotification('You entered an incorrect email or password. There could also be issues on the server, please try again.', 'Error', 3000);
         }
-    }, [error]);
+
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                onIsHidden(true);
+            }
+        }
+        document.addEventListener('keydown', handleKeyDown);
+    }, [error, onIsHidden]);
 
     const onSubmit = (values) => {
         authType === 'logIn' ? dispatch(loginUser(values)) : dispatch(registerUser(values));
@@ -44,7 +51,9 @@ const PopUpAuth = ({authType, isHidden, onIsHidden}) => {
         >
             {(formik) => (
                 <>
-                    <div className={`${s.backContainer} ${isHidden ? s.isHidden : ''}` }>
+                    <div className={`${s.backContainer} ${isHidden ? s.isHidden : ''}` } onClick={(e) => {
+                        if (e.target.className.includes('backContainer')) { onIsHidden(true)} 
+                    }}>
                         <div className={s.container}>
                             <h2 className={s.title}>{authType === 'logIn' ?  'Log In' : 'Registration'}</h2>
                             <p className={s.text}>{authType === 'logIn' ? 'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.' : 'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information'}</p>
