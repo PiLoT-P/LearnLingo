@@ -1,5 +1,20 @@
 @import '../../assets/styles/vars';
 
+.link{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+
+    color: $textColor;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25;
+
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .mainList {
     display: flex;
     flex-direction: column;

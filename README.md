@@ -1,8 +1,6 @@
-    Посилання
-
-Макет:
+Посилання Макет:
 https://www.figma.com/file/Mr8IfCL4T1iCvbigAou1dk/Learn-Lingo-(Copy)?type=design&node-id=13-671&mode=design&t=FepqamFZ2qtYn6DN-0
-ТЗ:
+Посилання ТЗ:
 https://docs.google.com/document/d/1ZB_MFgnnJj7t7OXtv5hESSwY6xRgVoACZKzgZczWc3Y/edit
 
 Загалом, це сайт для пошуку вчителів різних світових мов.
@@ -17,4 +15,6 @@ https://docs.google.com/document/d/1ZB_MFgnnJj7t7OXtv5hESSwY6xRgVoACZKzgZczWc3Y/
 переглядати коментарі від інших учнів і надсилати свої дані вчителю для зв'язку.
 
 Щодо макету, я не зрозумів, як реалізувати гумовий дизайн від 320 px. Також
-відзначив, що не всюди стилі співпадають з макетом.
+відзначив, що не всюди стилі співпадають з макетом. Є помилки при виклику запиту
+на favorites, це через те, що при перезавантаженні сторінки користувач в firabse
+стає не авторизованим, тому я просто добавив і решта даних в локальну память.

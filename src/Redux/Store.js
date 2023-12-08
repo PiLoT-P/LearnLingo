@@ -5,16 +5,22 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 
 const authPersistConfig = {
-    key: 'token',
+    key: 'auth',
+    storage,
+}
+
+const teachersPersistConfig = {
+    key: 'teacher',
     storage,
 }
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedTeachersReducer = persistReducer(teachersPersistConfig, teachersReducer);
 
 export const store = configureStore({
     reducer: {
         auth: persistedAuthReducer,
-        teachers: teachersReducer,
+        teachers: persistedTeachersReducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

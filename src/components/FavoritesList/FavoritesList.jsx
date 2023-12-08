@@ -8,6 +8,7 @@ import s from './FavoritesList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg';
 import { selectorTheme } from "Redux/auth/authSelectors";
 import clsx from "clsx";
+import { NavLink } from "react-router-dom";
 
 const FavoritesList = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const FavoritesList = () => {
 
     return (
         <>
+            <NavLink className={s.link} to='/home'>Home</NavLink>
             <ul className={s.mainList}>
                 {dataFavorites.map(({avatar_url, conditions, experience, id,languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
                     <li key={id} className={s.mainListItem}>

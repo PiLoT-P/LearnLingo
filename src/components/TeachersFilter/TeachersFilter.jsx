@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectorTeachers } from 'Redux/teachers/teachersSelectors';
 import { changeFilter } from 'Redux/teachers/teachersSlice';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const TeachersFilter = () => {
     const dispatch = useDispatch()
@@ -58,6 +59,7 @@ const TeachersFilter = () => {
                         options={prices}
                     />
                 </div>
+                <NavLink className={s.link} to='/home'>Home</NavLink>
             </div>
         </>
     );
