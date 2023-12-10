@@ -23,18 +23,27 @@ const PopUpAuth = ({authType, isHidden, onIsHidden}) => {
         if (error) {
             errorNotification('You entered an incorrect email or password. There could also be issues on the server, please try again.', 'Error', 3000);
         }
+    }, [error]);
 
+    useEffect(() => {
         const handleKeyDown = (e) => {
-            if (e.key === 'Escape') {
+            if (e.key === 'Escape' && !isHidden) {
                 onIsHidden(true);
+                document.body.style.overflow = 'visible';
             }
-        }
+        };
+
         document.addEventListener('keydown', handleKeyDown);
-    }, [error, onIsHidden]);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onIsHidden,isHidden]);
 
     const onSubmit = (values) => {
         authType === 'logIn' ? dispatch(loginUser(values)) : dispatch(registerUser(values));
-            onIsHidden();
+        onIsHidden();
+        document.body.style.overflow = 'visible';
     }
 
     const togglePassword = () => {
@@ -51,13 +60,13 @@ const PopUpAuth = ({authType, isHidden, onIsHidden}) => {
         >
             {(formik) => (
                 <>
-                    <div className={`${s.backContainer} ${isHidden ? s.isHidden : ''}` } onClick={(e) => {
-                        if (e.target.className.includes('backContainer')) { onIsHidden(true)} 
+                    <div className={`${s.backContainer} ${isHidden ? s.isHidden : ''}`} onClick={(e) => {
+                        if (typeof e.target.className === 'string' && e.target.className.includes('backContainer')) { onIsHidden(true);  document.body.style.overflow = 'visible';} 
                     }}>
                         <div className={s.container}>
                             <h2 className={s.title}>{authType === 'logIn' ?  'Log In' : 'Registration'}</h2>
                             <p className={s.text}>{authType === 'logIn' ? 'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.' : 'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information'}</p>
-                            <svg  className={s.iconExit} width="32" height="32" onClick={( ) => onIsHidden()}>
+                            <svg className={s.iconExit} width="32" height="32" onClick={() => { onIsHidden(); document.body.style.overflow = 'visible'; }}>
                                 <use href={`${svg}#exit`}></use>
                             </svg>
                             <form className={s.formPopUp} onSubmit={formik.handleSubmit}>

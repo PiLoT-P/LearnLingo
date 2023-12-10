@@ -8,7 +8,7 @@ import s from './FavoritesList.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg';
 import { selectorTheme } from "Redux/auth/authSelectors";
 import clsx from "clsx";
-import { NavLink } from "react-router-dom";
+import srcImage from '../../assets/image/9169253.jpg'
 
 const FavoritesList = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,6 @@ const FavoritesList = () => {
 
     return (
         <>
-            <NavLink className={s.link} to='/home'>Home</NavLink>
             <ul className={s.mainList}>
                 {dataFavorites.map(({avatar_url, conditions, experience, id,languages, lesson_info, lessons_done, levels, name, price_per_hour, rating, reviews, surname}, index) => (
                     <li key={id} className={s.mainListItem}>
@@ -112,7 +111,8 @@ const FavoritesList = () => {
                                         avatar_url,
                                         name,
                                         surname
-                                    })
+                                    });
+                                    document.body.style.overflow = 'hidden';
                                 }}
                             >Book trial lesson</button> : null}
                         </div>
@@ -120,6 +120,14 @@ const FavoritesList = () => {
                 ))
                 }
             </ul>
+            {dataFavorites.length < 1 ?
+                <div className={s.blockErrorImg}>
+                    <img className={s.img} width='530px' height='530px' src={srcImage} alt="art" />
+                    <span className={s.text}>Not found teachers</span>
+                </div>
+                :
+                null
+            }
             {isHidden ? null : <PopUpBookTrail dataTeacher={dataForTrail} setIsHidden={setIsHidden} setdataForTrail={setDataForTrail} />}
         </>
     );

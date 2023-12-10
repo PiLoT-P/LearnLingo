@@ -1,17 +1,28 @@
 import Select from 'react-select';
 import s from './TeachersFilter.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorTeachers } from 'Redux/teachers/teachersSelectors';
+import { selectorFilter, selectorTeachers } from 'Redux/teachers/teachersSelectors';
 import { changeFilter } from 'Redux/teachers/teachersSlice';
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
+import { selectorTheme } from 'Redux/auth/authSelectors';
 
 const TeachersFilter = () => {
     const dispatch = useDispatch()
     const teachersData = useSelector(selectorTeachers);
+    const theme = useSelector(selectorTheme);
+    const dataFilter = useSelector(selectorFilter);
     const [language, setLanguage] = useState(null);
     const [level, setLevel] = useState(null);
     const [price, setPrice] = useState(null);
+
+    useEffect(() => { 
+        const { language, level, price } = dataFilter;
+
+        setLanguage(language)
+        setLevel(level);
+        setPrice(price);
+    }, [dataFilter]);
 
     const uniqueLanguages = Array.from(new Set(teachersData.flatMap(teacher => teacher.languages)));
     const languages = uniqueLanguages.map(language => ({ value: language, label: language }));
@@ -22,6 +33,15 @@ const TeachersFilter = () => {
     const uniquePrices = Array.from(new Set(teachersData.flatMap(teacher => teacher.price_per_hour)));
     const sortedPrices = uniquePrices.sort((a, b) => a - b);
     const prices = sortedPrices.map(price => ({ value: price, label: price }));
+
+    const handleFilterUpdate = () => {
+        dispatch(changeFilter({ language: null, level: null, price: null }))
+
+        setLanguage(null);
+        setLevel(null);
+        setPrice(null);
+    }
+
 
     return (
         <>
@@ -35,6 +55,7 @@ const TeachersFilter = () => {
                             dispatch(changeFilter({language: e.value, level, price}))
                         }}
                         options={languages}
+                        value={language ? { value: language, label: language } : null}
                     />
                 </div>
                 <div>
@@ -46,6 +67,7 @@ const TeachersFilter = () => {
                             dispatch(changeFilter({language, level: e.value, price}))
                         }}
                         options={levels}
+                        value={level ? { value: level, label: level } : null}
                     />
                 </div>
                 <div>
@@ -57,9 +79,12 @@ const TeachersFilter = () => {
                             dispatch(changeFilter({language, level, price: e.value}))
                         }}
                         options={prices}
+                        value={price ? { value: price, label: price } : null}
                     />
                 </div>
-                <NavLink className={s.link} to='/home'>Home</NavLink>
+                <div className={s.blockBtn}>
+                    <button className={clsx(s.btn, s[theme])} type='button' onClick={handleFilterUpdate} >Update Filter</button>
+                </div>
             </div>
         </>
     );

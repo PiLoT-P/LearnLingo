@@ -1,11 +1,12 @@
 import { validationSchemaBookTrail } from 'yup/validationSchemaBojkTrail';
 import { selectorTheme } from 'Redux/auth/authSelectors';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import s from './PopUpBookTrail.module.scss';
 import svg from '../../assets/icons/symbol-defs.svg';
 import FormikWrapper from 'formik/formik';
 import clsx from 'clsx';
-import { useEffect } from 'react';
+
 
 const PopUpBookTrail = ({ dataTeacher, setIsHidden, setdataForTrail }) => {
     const theme = useSelector(selectorTheme);
@@ -14,10 +15,16 @@ const PopUpBookTrail = ({ dataTeacher, setIsHidden, setdataForTrail }) => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
                 setIsHidden(true);
+                document.body.style.overflow = 'visible';
             }
-        }
+        };
+
         document.addEventListener('keydown', handleKeyDown);
-    }, [setIsHidden])
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [setIsHidden]);
 
     const onSubmit = (values) => {
         console.log(values);
@@ -32,11 +39,9 @@ const PopUpBookTrail = ({ dataTeacher, setIsHidden, setdataForTrail }) => {
         >
             {(formik) => {
                 return(<>
-                    <div className={s.backdrop} onClick={(e) => {
-                        if (e.target.className.includes('backdrop')) { setIsHidden(true)} 
-                    }}>
+                    <div className={s.backdrop} onClick={(e) => { if (typeof e.target.className === 'string' && e.target.className.includes('backdrop')) { setIsHidden(true); document.body.style.overflow = 'visible';}}}>
                         <div className={s.container}>
-                            <svg className={s.iconExit} width="32" height="32" onClick={() => { setIsHidden(true); setdataForTrail(null); }}>
+                            <svg className={s.iconExit} width="32" height="32" onClick={() => { setIsHidden(true); setdataForTrail(null); document.body.style.overflow = 'visible'; }}>
                                 <use href={`${svg}#exit`}></use>
                             </svg>
                             <h3 className={s.title}>Book trial lesson</h3>

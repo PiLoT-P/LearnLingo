@@ -1,14 +1,12 @@
 
 import s from './Header.module.scss'
-import imgLogo from '../../assets/image/LogoPNG.png'
+import imgLogo from '../../assets/image/ukraineLG.png'
 import svg from 'assets/icons/symbol-defs.svg'
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectorIsAuth, selectorName, selectorTheme } from 'Redux/auth/authSelectors';
 import { logoutUser } from '../../Redux/auth/authOperation';
 import { cleanFavorites} from '../../Redux/teachers/teachersSlice';
-import { NotificationContainer } from 'react-notifications';
-import { errorNotification } from 'notifications/notifications';
 import ChangeTheme from '../ChangeTheme/ChangeTheme';
 import clsx from 'clsx';
 
@@ -21,15 +19,14 @@ const Header = ({ onLigIn, onRegister, onIsHidden }) => {
     return (
         <>
             <header className={s.header}>
-                <img className={s.logo} src={imgLogo} alt="Logo" />
+                <NavLink className={s.blockLogo} to='/home'>
+                    <img width="28px" height="28px" src={imgLogo} alt="Logo" />
+                    <span className={s.textLogo}>LearnLingo</span>
+                </NavLink>
                 <div className={s.navigate}>
-                    <NavLink className={s.text} to='/home'>Home</NavLink>
-                    <NavLink className={s.text} to='/teachers'>Teachers</NavLink>
-                    {isAuth ? <NavLink className={s.text} to='/favorites'>Favorites</NavLink> :
-                        <button className={`${s.text} ${s.btn}`} type='button' onClick={() => {
-                            errorNotification('First, log in or register', 'Error', 3000);
-                        }}>Favorites</button>
-                    }
+                    <NavLink className={`${s.text} ${s.link}`} to='/home'>Home</NavLink>
+                    <NavLink className={`${s.text} ${s.link}`} to='/teachers'>Teachers</NavLink>
+                    {isAuth ? <NavLink className={`${s.text} ${s.link}`} to='/favorites'>Favorites</NavLink> : null}
                 </div>
                 {isAuth ? 
                     <div className={s.users}>
@@ -44,20 +41,19 @@ const Header = ({ onLigIn, onRegister, onIsHidden }) => {
                     </div>
                     :
                     <div className={s.users}>
-                        <button className={s.logIn} type='button' onClick={() => { onLigIn(); onIsHidden() }}>
+                        <button className={s.logIn} type='button' onClick={() => { onLigIn(); onIsHidden(); document.body.style.overflow = 'hidden'; }}>
                             <svg width="20" height="20" className={clsx(s.iconLogIn, s[theme])}>
                                 <use xlinkHref={`${svg}#login`} />
                             </svg>
                             <span  className={s.text}>Log in</span>
                         </button>
-                        <button className={s.register} type='button' onClick={() => { onRegister(); onIsHidden() }}>
+                        <button className={s.register} type='button' onClick={() => { onRegister(); onIsHidden(); document.body.style.overflow = 'hidden'; }}>
                             <span className={s.text}>Registration</span>
                         </button>
                         <ChangeTheme/>
                     </div>
                 }
             </header>
-            <NotificationContainer/>
         </>
     );
 }

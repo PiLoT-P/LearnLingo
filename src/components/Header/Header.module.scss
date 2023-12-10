@@ -1,7 +1,7 @@
 @import '../../assets/styles/vars';
+@import '../../assets/styles/mixins';
 
 .header{
-    margin-top: 20px;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -9,8 +9,32 @@
     max-width: 1182px;
 
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
     align-items: center;
+    justify-content: center;
+
+    @include tablet{
+        justify-content: space-between;
+    }
+}
+
+.blockLogo{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .textLogo{
+        color: $textColor;
+
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.4px;
+        
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
 }
 
 .navigate{
@@ -22,11 +46,18 @@
         background-color: transparent;
         padding: 0;
         cursor: pointer;
+        
+    }
+    .link{
+        &:hover{
+            color: #8A8A89;
+        }
     }
 }
 
 .text{
     color: $textColor;
+
     font-family: 'Roboto';
     font-size: 16px;
     font-style: normal;
@@ -47,6 +78,10 @@
     padding: 0;
     border: none;
     background-color: transparent;
+    
+    &:hover .text {
+        color: #8A8A89;
+    }
     
 }
 .logIn .text{
@@ -135,6 +170,9 @@
     border-width: 0;
     border-radius: 12px;
     background: $textColor;
+    &:hover{
+        background-color: #292929;
+    }
 }
 
 .register .text{

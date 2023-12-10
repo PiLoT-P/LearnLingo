@@ -65,6 +65,7 @@
         text-align: center;
 
         &:hover {
+            background-color: $hoverColorYellow;
             &.Yellow {
                 background-color: $hoverColorYellow;
             }

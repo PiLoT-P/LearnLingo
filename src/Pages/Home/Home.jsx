@@ -19,7 +19,7 @@ const Home = () => {
     }
 
     return (
-        <section> 
+        <section style={{paddingBottom: "20px", paddingTop: "20px" }}> 
             <Header onLigIn={handleLogIn} onRegister={handleRegister} onIsHidden={handleIsHidden} />
             <Hero />
             <Footer />

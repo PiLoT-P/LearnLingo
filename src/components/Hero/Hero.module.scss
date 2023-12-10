@@ -1,4 +1,5 @@
 @import '../../assets/styles/vars';
+@import '../../assets/styles/mixins';
 
 .sectionHero{
     margin-left: auto;
@@ -6,20 +7,30 @@
     margin-bottom: 24px;
     max-width: 1312px;
 
-    display: flex;
-    gap: 24px
+    @include tablet{
+        display: flex;
+        gap: 24px;
+    }
 
 }
 .containerHeroText{
     padding-top: 98px;
     padding-bottom: 98px;
     padding-left: 64px;
-    padding-right: 108px;
+    padding-right: 64px;
 
     max-width: 720px;
 
     border-radius: 30px;
     background: $bgHeroColorContainer;
+}
+
+.img{
+    display: none;
+
+    @include tablet {
+        display: block;
+    }
 }
 .title{
     margin-bottom: 32px;
@@ -79,8 +90,9 @@
 }
 .link{
     display: flex;
+    justify-content: center;
     max-width: 267px;
-    padding: 16px 88px;
+    padding: 16px 22px;
     border-radius: 12px;
 
     background: $colorYellow;
@@ -113,6 +125,7 @@
     }
 
     &:hover{
+        background-color: $hoverColorYellow;
         &.Yellow {
             background-color: $hoverColorYellow;
         }

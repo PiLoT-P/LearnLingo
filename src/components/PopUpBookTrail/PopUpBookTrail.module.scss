@@ -19,8 +19,9 @@
     transform: translate(-50%, -50%);
     z-index: 11;
 
-    max-width: 600px;
+    max-width: 337px;
     max-height: 95vh;
+    min-width: 337px;
     padding-top: 45px;
     padding-left: 64px;
     padding-right: 64px;
@@ -32,6 +33,8 @@
 
     @include tablet{
         overflow: auto;
+        max-width: 600px;
+        
     }
 }   
 
@@ -244,7 +247,10 @@
 }
 
 .btn{
-    padding: 16px 215px;
+    padding: 16px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
     border: none;
     border-radius: 12px;

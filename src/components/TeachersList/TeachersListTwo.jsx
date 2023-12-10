@@ -139,6 +139,7 @@ const TeachersList = () => {
                                         name,
                                         surname
                                     })
+                                    document.body.style.overflow = 'hidden';
                                 }}
                             >Book trial lesson</button> : null}
                         </div>
